@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
+:root {
+    --White: hsl(0, 0%, 100%);
+    --Light-grayish-violet: hsl(270, 3%, 87%);
+    --Dark-grayish-violet: hsl(279, 6%, 55%);
+    --Very-dark-violet: hsl(278, 68%, 11%);
+    --Red: hsl(0, 100%, 66%);
+} 
+
 * {
     margin: 0;
     padding: 0;
@@ -10,15 +18,35 @@
 }
 
 body {
-    background-image: url(images/bg-main-desktop.png);
-    background-size: contain;
-    background-repeat: no-repeat;
     display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 0px 100px;
     width: 100%;
     height: 100vh;
+}
+
+/* SECTIONS */
+
+#section-card {
+    width: 40%;
+    background-image: url(images/bg-main-desktop.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+#section-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+}
+
+/* CARDS */
+
+#card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%);
 }
 
 #card-front {
@@ -44,76 +72,20 @@ body {
     position: relative;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    margin-right: 100px;
-}
-
-label {
-    text-transform: uppercase;
-    margin-bottom: 5px;
-    font-size: 15px;
-}
-
-input {
-    border: .5px solid hsl(279, 6%, 55%);
-    border-radius: 5px;
-    padding: 10px 10px;
-    margin-bottom: 10px;
-}
-
-input:focus {
-    outline: 2px solid hsl(278, 94%, 30%);
-}
-
-#more-info {
-    display: flex;
-    gap: 10px;
-}
-
-#cvc {
-    display: flex;
-    flex-direction: column;
-}
-
-#cvc input {
-    width: 210px;
-}
-
-#exp-date{
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-}
-
-#exp-date div {
-    display: flex;
-    width: 100%;
-    gap: 10px;
-}
-
-#exp-date input {
-    width: 80px;
-}
-
-#confirm {
-    margin-top: 40px;
-    border: none;
-    color: hsl(270, 3%, 87%);
-    background-color: hsl(278, 68%, 11%);
-    padding: 15px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
 #card-back span {
     position: absolute;
     color: white;
     top: 86.5px;
     left: 280px;
     font-size: 15px;
+}
+
+#top-card {
+    background-image: url(images/card-logo.svg);
+    background-size: contain;
+    background-repeat: no-repeat no-repeat;
+    width: 87px;
+    height: 47px;
 }
 
 #bottom-card {
@@ -135,8 +107,91 @@ input:focus {
     margin-top: 15px;
 }
 
+/* FORM */
+
+.error {
+    border: 2px solid var(--Red);
+}
+
+.error_message {
+    gap: 0;
+}
+
+.error_message::after {
+    content: "cant't be blank";
+    color: var(--Red);
+    margin-top: 5px;
+}
+
+form {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+input {
+    border: .5px solid var(--Dark-grayish-violet);
+    border-radius: 5px;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+}
+
+input:focus {
+    outline-color: hsl(249, 99%, 64%);
+}
+
+input::placeholder {
+    color: var(--Dark-grayish-violet);
+}
+
+#more-info {
+    display: flex;
+    gap: 5%;
+}
+
+#cvc {
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+#exp-date{
+    max-width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+#exp-date div {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+
+#exp-date input {
+    min-width: 20px;
+}
+
+#confirm {
+    max-width: 100%;
+    margin-top: 40px;
+    border: none;
+    color: var(--Light-grayish-violet);
+    background-color: var(--Very-dark-violet);
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* COMPLETE STATE */
+
 #complete-state {
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
@@ -150,15 +205,87 @@ input:focus {
 
 #complete-state h6 {
     font-size: 15px;
-    color: hsl(279, 6%, 55%);
+    color: var(--Dark-grayish-violet);
 }
 
 #continue-btn {
     margin-top: 30px;
     border: none;
-    color: hsl(270, 3%, 87%);
-    background-color: hsl(278, 68%, 11%);
+    color: var(--Light-grayish-violet);
+    background-color: var(--Very-dark-violet);
     padding: 10px 120px;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 1235px){
+    #card-front, #card-back {
+        max-width: 267px;
+        max-height: 145px;
+    }
+
+    #card-name-display, #card-expdate-display, #card-expdate-display span {
+        font-size: 12px;
+        margin-top: 8px;
+    }
+
+    #card-number-display {
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+
+    #card-front #top-card {
+        width: 60px;
+        height: 35px;
+    }
+
+    #card-back span {
+        top: 44%;
+        left: 78%;
+        font-size: 12px;
+    }
+
+}
+
+@media screen and (max-width: 1035px) {
+    body {
+        flex-direction: column;
+    }
+
+    #section-card {
+        width: 100%;
+        height: 25%;
+        background-image: url(images/bg-main-mobile.png);
+    }
+
+    #card {
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, -75%);
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    #card-front {
+        z-index: 1000;
+    }
+
+    #card-back {
+        top: 60px;
+    }
+
+    #section-form {
+        width: 100%;
+        height: 75%;
+    }
+
+    form {
+        width: 300px;
+    }
 }
